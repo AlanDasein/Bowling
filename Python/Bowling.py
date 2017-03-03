@@ -52,7 +52,7 @@ class Bowling:
         self.__played_turns[self.__current_turn - 1].append(random.randint(0, pins_left))
         
     def __gameCompleted(self):
-        return self.__current_turn == self.TURNS and (self.__current_try > self.TRIES or (self.__current_try == self.TRIES and not self.__isStrike(self.__current_turn - 1) and not self.__isSpare(self.__current_turn - 1)))
+        return self.__current_turn == self.TURNS and (self.__current_try > self.TRIES or (self.__current_try == self.TRIES and not self.__extraTry()))
     
     def __extraTry(self):
         return self.__current_turn == self.TURNS and self.__current_try == self.TRIES and (self.__isStrike(self.__current_turn - 1) or self.__isSpare(self.__current_turn - 1))
