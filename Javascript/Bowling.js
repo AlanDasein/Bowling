@@ -98,14 +98,7 @@
                 gameCompleted: function() {
                     return (
                         Bowling.vars.current_turn === Bowling.cons.TURNS &&
-                        (
-                            Bowling.vars.current_try > Bowling.cons.TRIES ||
-                            (
-                                Bowling.vars.current_try === Bowling.cons.TRIES &&
-                                !Bowling.funcs.utils.isStrike(Bowling.vars.current_turn) &&
-                                !Bowling.funcs.utils.isSpare(Bowling.vars.current_turn)
-                            )
-                        )
+                        (Bowling.vars.current_try > Bowling.cons.TRIES || (Bowling.vars.current_try === Bowling.cons.TRIES && !Bowling.funcs.utils.extraTry()))
                     );
                 },
 
