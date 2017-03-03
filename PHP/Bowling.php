@@ -44,7 +44,6 @@ class Bowling {
                     else if($this->isSpare($key)) $this->played_turns[$key]["score"] += $this->played_turns[$key + 1][1];
                 }
                 $total += $this->played_turns[$key]["score"]; // add the turn's score to total score
-                $this->played_turns[$key]["current_total"] = $total; // add the general score reached on that turn
                 echo "(turn score: ".$this->played_turns[$key]["score"].") (total score: ".$total.")".PHP_EOL; // output results (begin)
             }
             echo PHP_EOL."TOTAL SCORE: ".$total.PHP_EOL.PHP_EOL;
@@ -97,13 +96,7 @@ class Bowling {
      */
 
     private function gameCompleted() {
-        return (
-            $this->current_turn === self::TURNS &&
-            (
-                $this->current_try > self::TRIES ||
-                ($this->current_try === self::TRIES && !$this->isStrike($this->current_turn) && !$this->isSpare($this->current_turn))
-            )
-        );
+        return $this->current_turn === self::TURNS && ($this->current_try > self::TRIES || ($this->current_try === self::TRIES && !$this->extraTry()));
     }
 
     /*
