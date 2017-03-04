@@ -47,15 +47,35 @@ class Bowling:
         
     def __roll(self):
         pins_left = self.PINS
-        if self.__current_try >= self.TRIES and (self.__current_turn < self.TURNS or (self.__current_try == self.TRIES and not self.__isStrike(self.__current_turn - 1)) or (self.__current_try > self.TRIES and (not self.__isStrike(self.__current_turn - 1, self.__current_try - 2) or not self.__isSpare(self.__current_turn - 1)))):
+        if (
+        self.__current_try >= self.TRIES and
+        (
+        self.__current_turn < self.TURNS or
+        (self.__current_try == self.TRIES and not self.__isStrike(self.__current_turn - 1)) or
+        (
+        self.__current_try > self.TRIES and
+        (not self.__isStrike(self.__current_turn - 1, self.__current_try - 2) or not self.__isSpare(self.__current_turn - 1))
+        )
+        )
+        ):
             pins_left -= self.__played_turns[self.__current_turn - 1][self.__current_try - 2]
         self.__played_turns[self.__current_turn - 1].append(random.randint(0, pins_left))
         
     def __gameCompleted(self):
-        return self.__current_turn == self.TURNS and (self.__current_try > self.TRIES or (self.__current_try == self.TRIES and not self.__extraTry()))
+        return (
+        self.__current_turn == self.TURNS and
+        (
+        self.__current_try > self.TRIES or
+        (
+        self.__current_try == self.TRIES and not self.__isStrike(self.__current_turn - 1) and not self.__isSpare(self.__current_turn - 1))
+        )
+        )
     
     def __extraTry(self):
-        return self.__current_turn == self.TURNS and self.__current_try == self.TRIES and (self.__isStrike(self.__current_turn - 1) or self.__isSpare(self.__current_turn - 1))
+        return (
+        self.__current_turn == self.TURNS and self.__current_try == self.TRIES and
+        (self.__isStrike(self.__current_turn - 1) or self.__isSpare(self.__current_turn - 1))
+        )
     
     def __isStrike(self, this_turn, this_try = 0):
         return self.__played_turns[this_turn][this_try] == self.PINS
