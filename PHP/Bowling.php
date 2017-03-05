@@ -80,11 +80,7 @@ class Bowling {
         $pins_left = self::PINS;
         if(
             $this->current_try >= self::TRIES &&
-            (
-                $this->current_turn < self::TURNS ||
-                ($this->current_try === self::TRIES && !$this->isStrike($this->current_turn)) ||
-                ($this->current_try > self::TRIES && (!$this->isStrike($this->current_turn, $this->current_try - 1) || !$this->isSpare($this->current_turn)))
-            )
+            ($this->current_turn < self::TURNS || !$this->isStrike($this->current_turn, $this->current_try - 1))
         ) {$pins_left -= $this->played_turns[$this->current_turn][$this->current_try - 1];}
         $this->played_turns[$this->current_turn][$this->current_try] = rand(0, $pins_left);
     }

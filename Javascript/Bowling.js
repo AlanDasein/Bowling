@@ -39,9 +39,8 @@
                         var total = 0, score, output;
                         console.log();
                         for(let i = 1;i < Bowling.cons.TURNS + 1;i++) {
-                            output = "";
                             score = 0;
-                            output += ("TURN " + (i < 10 ? "0" + i : i) + ": (" + Bowling.vars.played_turns[i].slice(1).join(", ") + ") ");
+                            output = "TURN " + (i < 10 ? "0" + i : i) + ": (" + Bowling.vars.played_turns[i].slice(1).join(", ") + ") ";
                             for(let j = 1, k = Bowling.vars.played_turns[i].length;j < k;j++) score += Bowling.vars.played_turns[i][j];
                             if(i < Bowling.cons.TURNS) {
                                 if(Bowling.funcs.utils.isStrike(i)) {
@@ -77,14 +76,7 @@
                         Bowling.vars.current_try >= Bowling.cons.TRIES &&
                         (
                             Bowling.vars.current_turn < Bowling.cons.TURNS ||
-                            (Bowling.vars.current_try === Bowling.cons.TRIES && !Bowling.funcs.utils.isStrike(Bowling.vars.current_turn)) ||
-                            (
-                                Bowling.vars.current_try > Bowling.cons.TRIES &&
-                                (
-                                    !Bowling.funcs.utils.isStrike(Bowling.vars.current_turn, Bowling.vars.current_try - 1) ||
-                                    !Bowling.funcs.utils.isSpare(Bowling.vars.current_turn)
-                                )
-                            )
+                            !Bowling.funcs.utils.isStrike(Bowling.vars.current_turn, Bowling.vars.current_try - 1)
                         )
                     ) {pins_left -= Bowling.vars.played_turns[Bowling.vars.current_turn][Bowling.vars.current_try - 1];}
                     Bowling.vars.played_turns[Bowling.vars.current_turn][Bowling.vars.current_try] = Math.round(Math.random() * pins_left);
